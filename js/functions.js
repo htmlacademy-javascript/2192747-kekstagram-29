@@ -15,7 +15,8 @@ const checksStringLength = (string, length) => {
   return false;
 };
 
-console.log(checksStringLength('Ключ', 3));
+console.log(checksStringLength('Ключ', 3)); // Ожидаем: false
+console.log(checksStringLength('Ключ', 7)); // Ожидаем: true
 
 
 /* Задача №2
@@ -47,9 +48,9 @@ const isPalindrom = (string) => {
   return false;
 };
 
-console.log(isPalindrom('Всем привет'));
-console.log(isPalindrom('Лёша на пОлке клопа нашёл '));
-console.log(isPalindrom('А роза упала на лапу Азора'));
+console.log(isPalindrom('Всем привет')); //Ожидаем: false
+console.log(isPalindrom('Лёша на пОлке клопа нашёл ')); // Ожидаем: true
+console.log(isPalindrom('А роза упала на лапу Азора')); // Ожидаем: true
 
 
 /* Задача №3
@@ -74,5 +75,7 @@ const extractsNumbers = (string) => {
   return NaN;
 };
 
-console.log(extractsNumbers('лето2023'));
-console.log(extractsNumbers('лето'));
+console.log(extractsNumbers('лето2023')); // Ожидаем: 2023
+console.log(extractsNumbers('лето')); // Ожидаем: NaN
+console.log(extractsNumbers('1 кефир, 0.5 батона')); // Ожидаем: 105
+console.log(extractsNumbers('а я томат')); // Ожидаем: NaN
