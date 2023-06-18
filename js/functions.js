@@ -47,8 +47,26 @@ const isPalindrom = (string) => {
   return false;
 };
 
-console.log(isPalindrom('Всем привет'));
+/* console.log(isPalindrom('Всем привет'));
 console.log(isPalindrom('Лёша на пОлке клопа нашёл '));
 console.log(isPalindrom('А роза упала на лапу Азора'));
+ */
 
 
+
+/* Задача №3
+ Написать функцию которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9 и возвращает их в виде целого положительного числа. */
+
+const extractsNumbers = (string) => {
+  let result = '';
+  /* let stringSymbols = ''; */
+
+  for (let i = 0; i <= string.length - 1; i++) {
+    if (!Number.isNaN(parseInt(string[i], 10))) {
+      result += parseInt(string[i], 10);
+    }
+  }
+  return result;
+};
+
+console.log(extractsNumbers('key2006'));
