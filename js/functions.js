@@ -66,7 +66,7 @@ const extractsNumbers = (string) => {
   }
   /*  Хочу уточнить нужен ли тут тернарный оператор
   result = (!Number.isNaN(parseInt(result, 10))) ? result : NaN;
-  return resalt */
+  return result */
 
   if (!Number.isNaN(parseInt(result, 10))) {
     return result;
