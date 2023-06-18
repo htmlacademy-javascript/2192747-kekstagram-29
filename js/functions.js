@@ -47,11 +47,9 @@ const isPalindrom = (string) => {
   return false;
 };
 
-/* console.log(isPalindrom('Всем привет'));
+console.log(isPalindrom('Всем привет'));
 console.log(isPalindrom('Лёша на пОлке клопа нашёл '));
 console.log(isPalindrom('А роза упала на лапу Азора'));
- */
-
 
 
 /* Задача №3
@@ -59,14 +57,22 @@ console.log(isPalindrom('А роза упала на лапу Азора'));
 
 const extractsNumbers = (string) => {
   let result = '';
-  /* let stringSymbols = ''; */
 
   for (let i = 0; i <= string.length - 1; i++) {
     if (!Number.isNaN(parseInt(string[i], 10))) {
       result += parseInt(string[i], 10);
     }
   }
-  return result;
+  /*  Хочу уточнить нужен ли тут тернарный оператор
+  result = (!Number.isNaN(parseInt(result, 10))) ? result : NaN;
+  return resalt */
+
+  if (!Number.isNaN(parseInt(result, 10))) {
+    return result;
+  }
+
+  return NaN;
 };
 
-console.log(extractsNumbers('key2006'));
+console.log(extractsNumbers('лето2023'));
+console.log(extractsNumbers('лето'));
