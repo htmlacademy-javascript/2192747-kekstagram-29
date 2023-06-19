@@ -65,11 +65,11 @@ const extractsNumbers = (string) => {
     }
   }
   /*  Хочу уточнить нужен ли тут тернарный оператор
-  result = (!Number.isNaN(parseInt(result, 10))) ? result : NaN;
-  return result */
+  result = (!Number.isNaN(parseInt(result, 10))) ? parseInt(result, 10) : NaN;
+  return result; */
 
   if (!Number.isNaN(parseInt(result, 10))) {
-    return result;
+    return parseInt(result, 10);
   }
 
   return NaN;
@@ -78,4 +78,7 @@ const extractsNumbers = (string) => {
 console.log(extractsNumbers('лето2023')); // Ожидаем: 2023
 console.log(extractsNumbers('лето')); // Ожидаем: NaN
 console.log(extractsNumbers('1 кефир, 0.5 батона')); // Ожидаем: 105
-console.log(extractsNumbers('а я томат')); // Ожидаем: NaN
+console.log(extractsNumbers('а я томат'));
+console.log(extractsNumbers('агент 007')); // Ожидаем: 7
+
+
