@@ -7,16 +7,10 @@
 2. Возвращает false, если строка длиннее.
  */
 
-const checksStringLength = (string, length) => {
-  if (string.length <= length) {
-    return true;
-  }
+const checksStringLength = (string, length) => string.length <= length;
 
-  return false;
-};
-
-console.log(checksStringLength('Ключ', 3)); // Ожидаем: false
-console.log(checksStringLength('Ключ', 7)); // Ожидаем: true
+checksStringLength('Ключ', 3); // Ожидаем: false
+checksStringLength('Ключ', 7); // Ожидаем: true
 
 
 /* Задача №2
@@ -27,30 +21,30 @@ console.log(checksStringLength('Ключ', 7)); // Ожидаем: true
 2. Возвращает true, если строка палиндром.
 */
 
-function reverseString(string) {
+const reverseString = (modifiedString) => {
   let reversedString = '';
 
-  for (let i = 1; i <= string.length; i++) {
-    reversedString += string.at(-i);
+  for (let i = 1; i <= modifiedString.length; i++) {
+    reversedString += modifiedString.at(-i);
   }
 
-  const reversedModifiedString = reversedString.toUpperCase().replaceAll(' ', '');
-
-  return reversedModifiedString;
-}
+  return reversedString;
+};
 
 const isPalindrom = (string) => {
   const modifiedString = string.toUpperCase().replaceAll(' ', '');
-  if (modifiedString === reverseString(string)) {
+
+  if (modifiedString === reverseString(modifiedString)) {
     return true;
   }
 
   return false;
 };
 
-console.log(isPalindrom('Всем привет')); //Ожидаем: false
-console.log(isPalindrom('Лёша на пОлке клопа нашёл ')); // Ожидаем: true
-console.log(isPalindrom('А роза упала на лапу Азора')); // Ожидаем: true
+
+isPalindrom('Всем привет'); //Ожидаем: false
+isPalindrom('Лёша на пОлке клопа нашёл '); // Ожидаем: true
+isPalindrom('А роза упала на лапу Азора'); // Ожидаем: true
 
 
 /* Задача №3
@@ -64,21 +58,13 @@ const extractsNumbers = (string) => {
       result += parseInt(string[i], 10);
     }
   }
-  /*  Хочу уточнить нужен ли тут тернарный оператор
   result = (!Number.isNaN(parseInt(result, 10))) ? parseInt(result, 10) : NaN;
-  return result; */
 
-  if (!Number.isNaN(parseInt(result, 10))) {
-    return parseInt(result, 10);
-  }
-
-  return NaN;
+  return result;
 };
 
-console.log(extractsNumbers('лето2023')); // Ожидаем: 2023
-console.log(extractsNumbers('лето')); // Ожидаем: NaN
-console.log(extractsNumbers('1 кефир, 0.5 батона')); // Ожидаем: 105
-console.log(extractsNumbers('а я томат'));
-console.log(extractsNumbers('агент 007')); // Ожидаем: 7
-
-
+extractsNumbers('лето2023'); // Ожидаем: 2023
+extractsNumbers('лето'); // Ожидаем: NaN
+extractsNumbers('1 кефир, 0.5 батона'); // Ожидаем: 105
+extractsNumbers('а я томат'); // Ожидаем: NaN
+extractsNumbers('агент 007'); // Ожидаем: 7
