@@ -41,7 +41,7 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 
 const createMessage = () => Array.from({
   length: getRandomInteger(1, 3)
-}, () => getRandomArrayElement(MESSAGE), ).join('');
+}, () => getRandomArrayElement(MESSAGE),).join('');
 
 const makeComment = (commentIndex) => ({
   id: commentIndex,
@@ -61,8 +61,20 @@ const createPhotoDescription = (index) => ({
     makeComment(commentIndex + 1)))
 });
 
-console.log(createPhotoDescription(2));
+// const photosDescriptions = [];
+
+// while (photosDescriptions.length !== DESCRIPTION_ARRAY_LENGTH) {
+//   photosDescriptions.push(createPhotoDescription());
+//   photosDescriptions.reduce((acc, current) => {
+//     if (photosDescriptions.indexOf(current.id) === -1) {
+//       photosDescriptions.push(current);
+//     }
+//     return acc;
+//   },{});
+// }
+
 const photosDescriptions = Array.from({
   length: DESCRIPTION_ARRAY_LENGTH
 }, (_, index) => createPhotoDescription(index + 1));
+
 console.log(photosDescriptions);
