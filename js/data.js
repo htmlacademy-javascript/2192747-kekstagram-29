@@ -35,7 +35,7 @@ const NAME = [
   'Мила',
 ];
 
-const generateIDs = (arrayLength) => {
+const generateIds = (arrayLength) => {
   const Ids = [];
   while (Ids.length !== arrayLength) {
     const generatedItems = [];
@@ -69,13 +69,13 @@ const createPhotoDescription = (id) => ({
   description: getRandomArrayElement(PHOTO_DESCRIPTION, PHOTO_DESCRIPTION.length - 1),
   likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
   comment: (function () {
-    const uniqueCommentId = generateIDs(COMMENTS_MAX_COUNT);
+    const uniqueCommentId = generateIds(COMMENTS_MAX_COUNT);
     return uniqueCommentId.map((commentId) => makeComment(commentId));
   })()
 });
 
 const generateDescriptionArray = () => {
-  const uniqueId = generateIDs(DESCRIPTION_ARRAY_LENGTH);
+  const uniqueId = generateIds(DESCRIPTION_ARRAY_LENGTH);
   return uniqueId.map((id) => createPhotoDescription(id));
 };
 
