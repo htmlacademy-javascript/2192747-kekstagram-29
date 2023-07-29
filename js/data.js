@@ -1,4 +1,7 @@
-import {getRandomArrayElement, getRandomInteger} from './util.js';
+import {
+  getRandomArrayElement,
+  getRandomInteger
+} from './util.js';
 
 const LIKES_MIN_COUNT = 15;
 const LIKES_MAX_COUNT = 200;
@@ -32,10 +35,24 @@ const NAME = [
   'Мила',
 ];
 
+const ID = [];
+
+while (ID.length !== DESCRIPTION_ARRAY_LENGTH) {
+  const generatedItems = [];
+  generatedItems.push(getRandomInteger(1, DESCRIPTION_ARRAY_LENGTH));
+  const itemCheck = (item) => {
+    if (ID.indexOf(item) === -1) {
+      ID.push(item);
+      return true;
+    }
+    return false;
+  };
+  generatedItems.filter((item) => itemCheck(item));
+}
 
 const createMessage = () => Array.from({
   length: getRandomInteger(1, 3)
-}, () => getRandomArrayElement(MESSAGE),).join('');
+}, () => getRandomArrayElement(MESSAGE)).join('');
 
 const makeComment = (commentIndex) => ({
   id: commentIndex,
@@ -45,8 +62,8 @@ const makeComment = (commentIndex) => ({
 });
 
 const createPhotoDescription = (index) => ({
-  id: index,
-  url: `photos/${ index }.jpg`,
+  id: ID[index],
+  url: `photos/${ ID[index] }.jpg`,
   description: getRandomArrayElement(PHOTO_DESCRIPTION, PHOTO_DESCRIPTION.length - 1),
   likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
   comments: Array.from({
@@ -59,4 +76,6 @@ const generateDescriptionArray = () => Array.from({
   length: DESCRIPTION_ARRAY_LENGTH
 }, (_, index) => createPhotoDescription(index + 1));
 
-export {generateDescriptionArray};
+export {
+  generateDescriptionArray
+};
