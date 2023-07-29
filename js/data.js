@@ -54,7 +54,7 @@ const generateIDs = (arrayLength) => {
 
 const createMessage = () => Array.from({
   length: getRandomInteger(1, 3)
-}, () => getRandomArrayElement(MESSAGE), ).join('');
+}, () => getRandomArrayElement(MESSAGE)).join('');
 
 const makeComment = (commentId) => ({
   id: commentId,
