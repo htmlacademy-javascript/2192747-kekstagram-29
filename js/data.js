@@ -1,4 +1,7 @@
-import {getRandomArrayElement, getRandomInteger} from './util.js';
+import {
+  getRandomArrayElement,
+  getRandomInteger
+} from './util.js';
 
 const LIKES_MIN_COUNT = 15;
 const LIKES_MAX_COUNT = 200;
@@ -32,31 +35,50 @@ const NAME = [
   'Мила',
 ];
 
+const generateIds = (arrayLength) => {
+  const ID = [];
+  while (ID.length !== arrayLength) {
+    const generatedItems = [];
+    generatedItems.push(getRandomInteger(1, arrayLength));
+    const itemCheck = (item) => {
+      if (ID.indexOf(item) === -1) {
+        ID.push(item);
+        return true;
+      }
+      return false;
+    };
+    generatedItems.filter((item) => itemCheck(item));
+  }
+  return ID;
+};
 
 const createMessage = () => Array.from({
   length: getRandomInteger(1, 3)
-}, () => getRandomArrayElement(MESSAGE),).join('');
+}, () => getRandomArrayElement(MESSAGE)).join('');
 
-const makeComment = (commentIndex) => ({
-  id: commentIndex,
-  avatar: `img/${ commentIndex }.svg`,
+const makeComment = (commentId) => ({
+  id: commentId,
+  avatar: `img/${ commentId }.svg`,
   message: createMessage(),
   name: getRandomArrayElement(NAME, NAME.length - 1),
 });
 
-const createPhotoDescription = (index) => ({
-  id: index,
-  url: `photos/${ index }.jpg`,
+const createPhotoDescription = (id) => ({
+  id: id,
+  url: `photos/${ id }.jpg`,
   description: getRandomArrayElement(PHOTO_DESCRIPTION, PHOTO_DESCRIPTION.length - 1),
   likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
-  comments: Array.from({
-    length: COMMENTS_MAX_COUNT
-  }, ((_, commentIndex) =>
-    makeComment(commentIndex + 1)))
+  comment: (function () {
+    const uniqueCommentId = generateIds(COMMENTS_MAX_COUNT);
+    return uniqueCommentId.map((commentId) => makeComment(commentId));
+  })()
 });
 
-const generateDescriptionArray = () => Array.from({
-  length: DESCRIPTION_ARRAY_LENGTH
-}, (_, index) => createPhotoDescription(index + 1));
+const generateDescriptionArray = () => {
+  const uniqueId = generateIds(DESCRIPTION_ARRAY_LENGTH);
+  return uniqueId.map((id) => createPhotoDescription(id));
+};
 
-export {generateDescriptionArray};
+export {
+  generateDescriptionArray
+};
