@@ -1,3 +1,4 @@
 import {generateDescriptionArray} from './data.js';
+import {renderThumbnails} from './thumbnails.js';
 
-console.log(generateDescriptionArray());
+renderThumbnails(generateDescriptionArray());
