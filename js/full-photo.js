@@ -1,8 +1,11 @@
-const fullPhotoPopup = document.querySelector('.big-picture ');
+const fullPhotoModal = document.querySelector('.big-picture ');
+const commentCountElement = fullPhotoModal.querySelector('.social__comment-count');
+const commentListElement = fullPhotoModal.querySelector('.social__comments');
+
 const fullPhotoOpen = document.querySelector('picture');
 
 fullPhotoOpen.addEventListener('click', () => {
-  fullPhotoPopup.classList.remove('hidden');
+  fullPhotoModal.classList.remove('hidden');
 });
 
 userModalCloseElement.addEventListener('click', () => {
