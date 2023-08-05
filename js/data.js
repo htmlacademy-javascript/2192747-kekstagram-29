@@ -7,6 +7,7 @@ const LIKES_MIN_COUNT = 15;
 const LIKES_MAX_COUNT = 200;
 const COMMENTS_MAX_COUNT = 30;
 const DESCRIPTION_ARRAY_LENGTH = 25;
+const COMMENTS_AVATARS = 6;
 
 const PHOTO_DESCRIPTION = [
   'Красиво',
@@ -18,9 +19,12 @@ const PHOTO_DESCRIPTION = [
 ];
 
 const MESSAGE = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше'
+  'Всё отлично! ',
+  'В целом всё неплохо. Но не всё. ',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше. ',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально. ',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше. ',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?! ',
 ];
 
 const NAME = [
@@ -58,7 +62,7 @@ const createMessage = () => Array.from({
 
 const makeComment = (commentId) => ({
   id: commentId,
-  avatar: `img/${ commentId }.svg`,
+  avatar: `img/avatar-${ getRandomInteger(1, COMMENTS_AVATARS) }.svg`,
   message: createMessage(),
   name: getRandomArrayElement(NAME, NAME.length - 1),
 });
@@ -69,7 +73,7 @@ const createPhotoDescription = (id) => ({
   description: getRandomArrayElement(PHOTO_DESCRIPTION, PHOTO_DESCRIPTION.length - 1),
   likes: getRandomInteger(LIKES_MIN_COUNT, LIKES_MAX_COUNT),
   comment: (function () {
-    const uniqueCommentId = generateIds(COMMENTS_MAX_COUNT);
+    const uniqueCommentId = generateIds(getRandomInteger(0, COMMENTS_MAX_COUNT));
     return uniqueCommentId.map((commentId) => makeComment(commentId));
   })()
 });
