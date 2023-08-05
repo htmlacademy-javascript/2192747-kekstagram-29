@@ -2,6 +2,7 @@ import {
   generateModal
 } from './full-photo.js';
 
+
 const templateThumbnail = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 
