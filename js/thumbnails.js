@@ -1,36 +1,39 @@
-import {
-  generateModal
-} from './full-photo.js';
+import { showBigPhoto } from './full-photo.js';
+const picturesElement = document.querySelector('.pictures');
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const templateThumbnail = document.querySelector('#picture').content.querySelector('.picture');
-const picturesContainer = document.querySelector('.pictures');
+const renderPictures = (photos) => {
+  photos.forEach(({ likes, comments, url, id, description }) => {
+    const photo = pictureTemplate.cloneNode(true);
+    const likesElement = photo.querySelector('.picture__likes');
+    const commentsElement = photo.querySelector('.picture__comments');
+    const imageElement = photo.querySelector('.picture__img');
 
-const createThumbnail = (picture) => {
-  const thumbnail = templateThumbnail.cloneNode(true);
+    likesElement.textContent = likes;
+    commentsElement.textContent = comments.length;
+    imageElement.src = url;
+    imageElement.alt = description;
+    photo.dataset.photoId = id;
 
-  thumbnail.querySelector('.picture__img').src = picture.url;
-  thumbnail.querySelector('.picture__img').alt = picture.description;
-  thumbnail.querySelector('.picture__comments').textContent = picture.comment.length;
-  thumbnail.querySelector('.picture__likes').textContent = picture.likes;
-
-  const openFullSize = () => thumbnail.addEventListener(
-    'click', generateModal(picture));
-
-  thumbnail.addEventListener('click', openFullSize);
-
-  return thumbnail;
-};
-
-const renderThumbnails = (pictures) => {
-  const fragment = document.createDocumentFragment();
-  pictures.forEach((picture) => {
-    const thumbnail = createThumbnail(picture);
-    fragment.append(thumbnail);
+    picturesElement.appendChild(photo);
   });
-
-  picturesContainer.append(fragment);
 };
 
-export {
-  renderThumbnails
+const setPictureListener = (photos) => {
+  picturesElement.addEventListener('click', (evt) => {
+    const thumbnail = evt.target.closest('.picture');
+
+    if (!thumbnail) {
+      return;
+    }
+
+    const photoId = parseInt(thumbnail.dataset.photoId, 10);
+    const photo = photos.find((item) => item.id === photoId);
+
+    if (photo) {
+      showBigPhoto(photo);
+    }
+  });
 };
+
+export { renderPictures, setPictureListener };
