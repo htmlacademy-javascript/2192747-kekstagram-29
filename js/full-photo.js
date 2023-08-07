@@ -1,5 +1,7 @@
 import { isEscapeKey } from './util.js';
 
+const COMMENTS_FOR_PORTION = 5;
+
 const bigPhoto = document.querySelector('.big-picture');
 const commentTemplate = bigPhoto.querySelector('.social__comment');
 const bigPictureImg = bigPhoto.querySelector('.big-picture__img img');
@@ -7,8 +9,6 @@ const commentCounter = bigPhoto.querySelector('.social__comment-count');
 const commentsLoader = bigPhoto.querySelector('.comments-loader');
 const closeButton = bigPhoto.querySelector('.cancel');
 const socialComments = bigPhoto.querySelector('.social__comments');
-
-const COMMENTS_FOR_PORTION = 5;
 
 let commentsShowed = 0;
 let allComments = [];

@@ -2,6 +2,14 @@ import { resetScale } from './scale.js';
 import { resetEffects } from './effects.js';
 import { isEscapeKey } from './util.js';
 
+const MAX_HASHTAG_COUNT = 5;
+const VALID_SYMBOLS = /^#[a-zа-я0-9]{1,19}$/i;
+const TAG_ERROR_TEXT = 'Хештеги введёны неверно.';
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
+
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
@@ -10,14 +18,6 @@ const uploadCancelButton = document.querySelector('#upload-cancel');
 const hashtagElement = document.querySelector('.text__hashtags');
 const descpriptionElement = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
-
-const MAX_HASHTAG_COUNT = 5;
-const VALID_SYMBOLS = /^#[a-zа-я0-9]{1,19}$/i;
-const TAG_ERROR_TEXT = 'Хештеги введёны неверно.';
-const SubmitButtonText = {
-  IDLE: 'Опубликовать',
-  SENDING: 'Публикую...'
-};
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
