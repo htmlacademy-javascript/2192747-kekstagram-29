@@ -3,7 +3,7 @@ import { isEscapeKey } from './util.js';
 const COMMENTS_FOR_PORTION = 5;
 
 const bigPhoto = document.querySelector('.big-picture');
-const commentTemplate = bigPhoto.querySelector('.social__comment');
+const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const bigPictureImg = bigPhoto.querySelector('.big-picture__img img');
 const commentCounter = bigPhoto.querySelector('.social__comment-count');
 const commentsLoader = bigPhoto.querySelector('.comments-loader');
@@ -14,7 +14,7 @@ let commentsShowed = 0;
 let allComments = [];
 
 const hideBigPhoto = () => {
-  bigPhoto.classList.add('hidden');
+  bigPhoto.cgitlassList.add('hidden');
   document.body.classList.remove('modal-open');
   commentsLoader.classList.remove('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
