@@ -70,8 +70,8 @@ const updateSlider = () => {
       min: chosenEffect.min,
       max: chosenEffect.max,
     },
-    start: chosenEffect.max,
     step: chosenEffect.step,
+    start: chosenEffect.max,
   });
 
   if (isDefault()){
@@ -108,7 +108,7 @@ const onSliderUpdate = () => {
   imgElement.style.filter = isDefault()
     ? DEFAULT_EFFECT.style
     : `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
-  // effectLevelElement.value = sliderValue;
+  effectLevelElement.value = sliderValue;
 };
 
 const resetEffects = () => {
