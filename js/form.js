@@ -4,7 +4,7 @@ import { isEscapeKey } from './util.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-я0-9]{1,19}$/i;
-const TAG_ERROR_TEXT = 'Хештеги введёны неверно.';
+const TAG_ERROR_TEXT = 'Хештеги одинаковые';
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Публикую...'

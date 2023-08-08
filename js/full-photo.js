@@ -14,7 +14,7 @@ let commentsShowed = 0;
 let allComments = [];
 
 const hideBigPhoto = () => {
-  bigPhoto.cgitlassList.add('hidden');
+  bigPhoto.classList.add('hidden');
   document.body.classList.remove('modal-open');
   commentsLoader.classList.remove('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
