@@ -2,9 +2,17 @@ import { resetScale } from './scale.js';
 import { resetEffects } from './effects.js';
 import { isEscapeKey } from './util.js';
 
+const TOP_PRIORITY = 1;
+const SECONDARY_PRIORITY = 2;
+const TERTIARY_PRIORITY = 3;
+
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-я0-9]{1,19}$/i;
-const TAG_ERROR_TEXT = 'Хештеги одинаковые';
+const ErrorText = {
+  INVALID_COUNT: `Максимум ${MAX_HASHTAG_COUNT} хэштегов`,
+  NOT_UNIQUE: 'Одинаковые хештеги',
+  INVALID_PATTERN: 'Неправильный хэштег',
+};
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Публикую...'
@@ -52,20 +60,12 @@ function onDocumentKeydown(evt) {
   }
 }
 
-const isValidTag = (tag) => VALID_SYMBOLS.test(tag);
-
-const isValidCount = (tag) => tag.length <= MAX_HASHTAG_COUNT;
-
-const isUniqueTags = (tags) => {
-  const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
-
+const normalizeTags = (tagString) => tagString.trim().split(' ').filter((tag) => Boolean(tag.length));
+const isValidTag = (value) => normalizeTags(value).every((tag) => VALID_SYMBOLS.test(tag));
+const isValidCount = (value) => normalizeTags(value).length <= MAX_HASHTAG_COUNT;
+const isUniqueTags = (value) => {
+  const lowerCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
-};
-
-const validateTags = (value) => {
-  const tags = value.trim().split(' ').filter((tag) => tag.trim().length);
-
-  return isValidCount(tags) && isUniqueTags(tags) && tags.every(isValidTag);
 };
 
 const onFileInputChange = () => showModal();
@@ -76,11 +76,9 @@ const setupForm = () => {
   uploadFile.addEventListener('change', onFileInputChange);
   uploadCancelButton.addEventListener('click', onCancelButtonClick);
 
-  pristine.addValidator(
-    hashtagElement,
-    validateTags,
-    TAG_ERROR_TEXT
-  );
+  pristine.addValidator(hashtagElement, isValidCount, ErrorText.INVALID_COUNT,TERTIARY_PRIORITY,true);
+  pristine.addValidator(hashtagElement, isUniqueTags, ErrorText.NOT_UNIQUE,TOP_PRIORITY,true);
+  pristine.addValidator(hashtagElement, isValidTag, ErrorText.INVALID_PATTERN,SECONDARY_PRIORITY,true);
 };
 
 const blockSubmitButton = () => {
